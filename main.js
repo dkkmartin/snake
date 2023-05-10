@@ -32,23 +32,25 @@ function appendCubes(mapSize) {
   for(let i = 0; i < mapSize; i++) {
     const newCube = document.createElement('div')
     newCube.classList.add('board__cube')
-    newCube.setAttribute('data-position', i + 1)
+    newCube.setAttribute('data-position', i)
     board.appendChild(newCube)
   }
 }
 
 function gameRound(mapSize) {
+  const randomPosForApple = apple(mapSize)
   appendCubes(mapSize)
   board.style.display = 'grid'
   const gameBoardArray = Array.from(document.querySelectorAll('.board__cube'))
   console.log(gameBoardArray)
+  gameBoardArray[randomPosForApple].style.backgroundColor = 'red'
 }
 
 function snake() {
 
 }
 
-function apple() {
-  const randomPos = Math.floor(Math.random() * 2001)
-  
+function apple(mapSize) {
+  const randomPos = Math.floor(Math.random() * mapSize) + 1
+  return randomPos
 }
