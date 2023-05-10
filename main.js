@@ -40,14 +40,18 @@ function appendCubes(mapSize) {
 function gameRound(mapSize) {
   const randomPosForApple = apple(mapSize)
   appendCubes(mapSize)
+  gameBoardArray(randomPosForApple)
   board.style.display = 'grid'
-  const gameBoardArray = Array.from(document.querySelectorAll('.board__cube'))
-  console.log(gameBoardArray)
   gameBoardArray[randomPosForApple].style.backgroundColor = 'red'
 }
 
 function snake() {
 
+}
+
+function gameBoardArray(position) {
+  const boardArray = Array.from(document.querySelectorAll('.board__cube'))
+  
 }
 
 function apple(mapSize) {
