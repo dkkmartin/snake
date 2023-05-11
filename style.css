@@ -9,7 +9,6 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  gap: 5em;
   justify-content: center;
   align-items: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
@@ -51,4 +50,8 @@ body {
   width: 20px;
   height: 20px;
   background-color: green;
+}
+
+.highscore {
+  display: none;
 }
