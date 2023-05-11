@@ -86,19 +86,34 @@ function snake(mapSize) {
 function sendSnakeDown(pos, mapSize) {
   if(mapSize === 1000) {
     pos = pos + 40
-    boardArray[pos].classList.add('snake')
+    try {
+      boardArray[pos].classList.add('snake')
+    } catch (error) {
+      // Call game over function here
+      console.log('game over')
+    }
     boardArray[pos - 40].classList.remove('snake')
     currentSnakePos = pos
   }
   if(mapSize === 1500) {
     pos = pos + 50
-    boardArray[pos].classList.add('snake')
+    try {
+      boardArray[pos].classList.add('snake')
+    } catch (error) {
+      // Call game over function here
+      console.log('game over')
+    }
     boardArray[pos - 50].classList.remove('snake')
     currentSnakePos = pos
   }
   if(mapSize === 2000) {
     pos = pos + 50
-    boardArray[pos].classList.add('snake')
+    try {
+      boardArray[pos].classList.add('snake')
+    } catch (error) {
+      // Call game over function here
+      console.log('game over')
+    }
     boardArray[pos - 50].classList.remove('snake')
     currentSnakePos = pos
   }
@@ -107,27 +122,54 @@ function sendSnakeDown(pos, mapSize) {
 function sendSnakeUp(pos, mapSize) {
   if(mapSize === 1000) {
     pos = pos - 40
-    boardArray[pos].classList.add('snake')
+    try {
+      boardArray[pos].classList.add('snake')
+    } catch (error) {
+      // Call game over function here
+      console.log('game over')
+    }
     boardArray[pos + 40].classList.remove('snake')
     currentSnakePos = pos
   }
   if(mapSize === 1500) {
     pos = pos - 50
-    boardArray[pos].classList.add('snake')
+    try {
+      boardArray[pos].classList.add('snake')
+    } catch (error) {
+      // Call game over function here
+      console.log('game over')
+    }
     boardArray[pos + 50].classList.remove('snake')
     currentSnakePos = pos
   }
   if(mapSize === 2000) {
     pos = pos - 50
-    boardArray[pos].classList.add('snake')
+    try {
+      boardArray[pos].classList.add('snake')
+    } catch (error) {
+      // Call game over function here
+      console.log('game over')
+    }
     boardArray[pos + 50].classList.remove('snake')
     currentSnakePos = pos
   }
 }
 
 function sendSnakeLeft(pos) {
+  if(
+    pos === 40 || pos === 80 || pos === 120 || pos === 160 || pos === 200 ||
+    pos === 240 || pos === 280 || pos === 320 || pos === 360 || pos === 400 || pos === 440 || pos === 480 || pos === 520 || pos === 560 || pos === 600 || pos === 640 || pos === 680 || pos === 720 || pos === 760 || pos === 800 || pos === 840 || pos === 880 || pos === 920 || pos === 960 || pos === 1000
+    ) {
+      // Call game over function here
+    console.log('game over')
+  }
   pos = pos - 1
-  boardArray[pos].classList.add('snake')
+  try {
+    boardArray[pos].classList.add('snake')
+  } catch (error) {
+    // Call game over function here
+    console.log('game over')
+  }
   boardArray[pos + 1].classList.remove('snake')
   currentSnakePos = pos
 }
@@ -135,15 +177,24 @@ function sendSnakeLeft(pos) {
 function sendSnakeRight(pos) {
   if(
     pos === 39 || pos === 79 || pos === 119 || pos === 159 || pos === 199 ||
-    pos === 239 || pos === 279 || pos === 319 || pos === 359 || pos === 399 || pos === 439 || pos === 479 || pos === 519 || pos === 559 || pos === 599 || pos === 639 || pos === 679 || pos === 719 || pos === 759 || pos === 799 || pos === 839 || pos === 879 || pos === 919 || pos === 959 || pos === 999 
+    pos === 239 || pos === 279 || pos === 319 || pos === 359 || pos === 399 || pos === 439 || pos === 479 || pos === 519 || pos === 559 || pos === 599 || pos === 639 || pos === 679 || pos === 719 || pos === 759 || pos === 799 || pos === 839 || pos === 879 || pos === 919 || pos === 959 || pos === 999
     ) {
       // Call game over function here
     console.log('game over')
   }
   pos = pos + 1
-  boardArray[pos].classList.add('snake')
+  try {
+    boardArray[pos].classList.add('snake')
+  } catch (error) {
+    // Call game over function here
+    console.log('game over')
+  }
   boardArray[pos - 1].classList.remove('snake')
   currentSnakePos = pos
+}
+
+function gameOver() {
+
 }
 
 function apple(mapSize) {
