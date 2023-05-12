@@ -8,8 +8,11 @@ const mapSelectorButtons = document.querySelector('.size__selector__con')
 const bigSizeMap = 2000
 const mediumSizeMap = 1500
 const smallSizeMap = 1000
+let highScorePoints = 0
+let appleCube
 let selectedMapSize
 let boardArray
+let snakeLength = []
 let currentSnakePos
 let isSnakeMoving = false
 let snakeTimeInterval
@@ -61,40 +64,28 @@ function startGame(mapSize) {
 }
 
 (function handleInputForSnake () {
-  document.addEventListener('keydown', (event) => {
-    if(event.code === 'ArrowDown') {
-      sendSnakeDown(currentSnakePos, selectedMapSize)
-      snakeMover()
-    }
-    if(event.code === 'ArrowUp') {
-      sendSnakeUp(currentSnakePos, selectedMapSize)
-      snakeMover()
-    }
-    if(event.code === 'ArrowLeft') {
-      sendSnakeLeft(currentSnakePos, selectedMapSize)
-      snakeMover()
-    }
-    if(event.code === 'ArrowRight') {
-      sendSnakeRight(currentSnakePos, selectedMapSize)
-      snakeMover()
-    }
-  })
+  document.addEventListener('keydown', keyboardArrows)
 })()
 
-function placeSnake(mapSize) {
-  if(mapSize === 1000) {
-    boardArray[500].classList.add('snake')
-    currentSnakePos = 500
+function keyboardArrows (event) {
+  if(event.code === 'ArrowDown') {
+    sendSnakeDown(currentSnakePos, selectedMapSize)
+    snakeMover()
   }
-  if(mapSize === 1500) {
-    boardArray[725].classList.add('snake')
-    currentSnakePos = 725
+  if(event.code === 'ArrowUp') {
+    sendSnakeUp(currentSnakePos, selectedMapSize)
+    snakeMover()
   }
-  if(mapSize === 2000) {
-    boardArray[975].classList.add('snake')
-    currentSnakePos = 975
+  if(event.code === 'ArrowLeft') {
+    sendSnakeLeft(currentSnakePos, selectedMapSize)
+    snakeMover()
+  }
+  if(event.code === 'ArrowRight') {
+    sendSnakeRight(currentSnakePos, selectedMapSize)
+    snakeMover()
   }
 }
+
 // if pos is undefined snake hit a wall and should game over
 function sendSnakeDown(pos, mapSize) {
   lastArrowKeyPressed = sendSnakeDown
@@ -220,8 +211,30 @@ function sendSnakeRight(pos) {
   currentSnakePos = pos
 }
 
+function snakePoint () {
+  if(apple === boardArray[currentSnakePos]) {
+    highScorePoints++
+    highScore.textContent = 'Highscore: ' + highScorePoints
+    snakeExtender()
+  }
+}
+
+// highscore is equal to length of snake
+// function that extends the array of snakeLength by the length of higscore
+// updates every position each cycle
+// snakeLength[1] = snakeLength[0] - 1 continue this loop for the length of snake
+
+function snakeExtender() {
+  for(let i = 0; i < highScorePoints; i++) {
+    snakeLength[i] = currentSnakePos - i
+    //boardArray[snakeLength[i]].classList.add('snake')
+  }
+  console.log(snakeLength)
+}
+
 function gameOver() {
   stopSnake()
+  document.removeEventListener('keydown', keyboardArrows)
   gameInfo.style.display = 'block'
   gameInfo.textContent = 'You died'
   board.style.display = 'none'
@@ -236,11 +249,29 @@ function snakeMover() {
     clearInterval(snakeTimeInterval)
   }
   snakeTimeInterval = setInterval(() => {
+    snakePoint()
+    snakeExtender()
     lastArrowKeyPressed(currentSnakePos, selectedMapSize)
   }, 200)
+}
+
+function placeSnake(mapSize) {
+  if(mapSize === 1000) {
+    boardArray[500].classList.add('snake')
+    currentSnakePos = 500
+  }
+  if(mapSize === 1500) {
+    boardArray[725].classList.add('snake')
+    currentSnakePos = 725
+  }
+  if(mapSize === 2000) {
+    boardArray[975].classList.add('snake')
+    currentSnakePos = 975
+  }
 }
 
 function apple(mapSize) {
   const randomPos = Math.floor(Math.random() * mapSize) + 1
   boardArray[randomPos].classList.add('apple')
+  apple = boardArray[randomPos]
 }
